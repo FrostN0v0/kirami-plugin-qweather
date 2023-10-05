@@ -1,0 +1,17 @@
+[project]
+name = "kirami-plugin-qweather"
+version = "0.1.0"
+description = "基于和风天气的天气查询、订阅与推送插件"
+authors = [
+    {name = "FrostN0v0", email = "1614591760@qq.com"},
+]
+dependencies = [
+    "kiramibot>=0.3.2",
+]
+requires-python = ">=3.10"
+readme = "README.md"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
