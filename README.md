@@ -4,56 +4,26 @@
 
 <div align="center">
 
-# kirami-plugin-example
+# kirami-plugin-qweather
 
-_✨ KiramiBot 插件简单描述 ✨_
+_✨ 基于和风天气的天气查询、订阅与推送插件 ✨_
 
 
 <a href="./LICENSE">
-    <img src="https://img.shields.io/github/license/owner/kirami-plugin-example.svg" alt="license">
+    <img src="https://img.shields.io/github/license/FrostN0v0/kirami-plugin-qweather.svg" alt="license">
 </a>
-<a href="https://pypi.python.org/pypi/kiramibot-plugin-example">
-    <img src="https://img.shields.io/pypi/v/kirami-plugin-example.svg" alt="pypi">
+<a href="https://pypi.python.org/pypi/kirami-plugin-qweather">
+    <img src="https://img.shields.io/pypi/v/kirami-plugin-qweather.svg" alt="pypi">
 </a>
 <img src="https://img.shields.io/badge/python-3.10+-blue.svg" alt="python">
 
 </div>
 
-这是一个 KiramiBot 插件项目的模板库, 你可以直接使用本模板创建你的 KiramiBot 插件项目的仓库
-
-模板库使用方法:
-1. 点击仓库中的 "Use this template" 按钮, 输入仓库名与描述, 点击 "Create repository from template" 创建仓库
-2. 在创建好的新仓库中, 在 "Add file" 菜单中选择 "Create new file", 在新文件名处输入`LICENSE`, 此时在右侧会出现一个 "Choose a license template" 按钮, 点击此按钮选择开源协议模板, 然后在最下方提交新文件到主分支
-3. 全局替换`owner`为仓库所有者ID; 全局替换`kirami-plugin-example`为插件名; 全局替换`kirami_plugin_example`为包名; 修改 python 徽标中的版本为你插件的运行所需版本
-4. 修改 README 中的插件名和插件描述, 并在下方填充相应的内容
-
-配置发布工作流:
-1. 跟随 [PyPI 文档](https://docs.pypi.org/trusted-publishers/) 配置 可信发布
-   - **PyPI Project Name** 插件名，如：`kirami-plugin-xxx`
-   - **Owner** 你的 Github 用户名
-   - **Repository name** 仓库名，如：`kirami-plugin-xxx`
-   - **Workflow name** 发布工作流，填写 `release.yml`
-   - **Environment name** 是你的发布环境，填写 `release`
-     
-   例如，如果您有一个位于 https://github.com/octo-org/sampleproject 的存储库，其发布工作流程位于 `release.yml`，并且您希望将其作为示例项目发布到 PyPI，那么您将执行以下操作： 
-   <div align="left">
-     <img src="https://docs.pypi.org/assets/pending-publisher-form-filled.png" style="wight: 1000px; height: 600px"/>
-   </div>
-
-3. 进入工作流，修改 `environment`
-   
-   ```yaml
-   environment:
-      name: release
-      url: https://pypi.org/p/<your-pypi-project-name>
-   ```
-
-4. 发版
-
-
 ## 📖 介绍
 
-这里是插件的详细介绍部分
+基于[和风天气](https://www.qweather.com/)的天气查询、订阅与推送插件
+
+在 [nonebot-plugin-heweather](https://github.com/kexue-z/nonebot-plugin-heweather) 的基础上添加了私聊与群聊的天气订阅与推送功能
 
 ## 💿 安装
 
@@ -63,34 +33,34 @@ _✨ KiramiBot 插件简单描述 ✨_
 <summary>pip</summary>
   
 ```bash
-pip install kirami-plugin-example
+pip install kirami-plugin-qweather
 ```
 </details>
 <details>
 <summary>pdm</summary>
 
 ```bash
-pdm add kirami-plugin-example
+pdm add kirami-plugin-qweather
 ```
 </details>
 <details>
 <summary>poetry</summary>
 
 ```bash
-poetry add kirami-plugin-example
+poetry add kirami-plugin-qweather
 ```
 </details>
 <details>
 <summary>conda</summary>
 
 ```bash
-conda install kirami-plugin-example
+conda install kirami-plugin-qweather
 ```
 </details>
 
 打开 KiramiBot 项目根目录下的配置文件, 以 `kirami.toml` 为例，在 `[plugin]` 部分追加写入
 ```toml
-plugins = ["kiramit_plugin_example"]
+plugins = ["kiramit_plugin_qweather"]
 ```
 
 ## ⚙️ 配置
@@ -99,14 +69,46 @@ plugins = ["kiramit_plugin_example"]
 
 | 配置项 | 必填 | 默认值 | 说明 |
 |:-----:|:----:|:----:|:----:|
-| 配置项1 | 是 | 无 | 配置说明 |
-| 配置项2 | 否 | 无 | 配置说明 |
+| qweather_apikey | 是 | 无 | APIKEY |
+| qweather_apitype | 是 | 无 | api 类型 |
+| qweather_hourlytype | 否 | 1 | 逐小时天气返回类型：1 = 未来12小时 (默认值) 2 = 未来24小时 |
+
+### api类型说明
+
+0 = 普通版 免费订阅 (7 天天气预报, 1000次请求/天)
+
+1 = 个人开发版 标准订阅 (7 天天气预报)
+
+2 = 商业版 (7 天天气预报)
+
+### APIKEY获取方式
+
+**1、注册和风天气账号**  
+进入官网注册[https://id.qweather.com/#/login](https://id.qweather.com/#/login)  
+**2、进入控制台**  
+登录后，点击 “和风天气开发者控制台”  
+**3、创建项目**  
+点击控制台左侧 “项目管理”，然后点击 “创建项目”，根据提示自行填写  
+“选择订阅” -> “免费订阅”，“设置 KEY” -> “Web API”，都填好后“创建”  
+**4、获取 key**  
+返回 “项目管理”，可以看到创建的项目，点击 KEY 下面的 “查看”。
 
 ## 🎉 使用
 ### 指令表
 | 指令 | 权限 | 需要@ | 范围 | 说明 |
 |:-----:|:----:|:----:|:----:|:----:|
-| 指令1 | 主人 | 否 | 私聊 | 指令说明 |
-| 指令2 | 群员 | 是 | 群聊 | 指令说明 |
+| 天气 | 用户 | 否 | 全部 | 查询天气，支持跟随城市名、以英文逗号分隔的经纬度 如：北京天气、120.38946,36.07223天气、天气 武汉 |
+| 天气订阅 | 用户 | 否 | 全部 | 私人天气订阅，将以私聊形式推送（请确保有机器人好友），命令格式 天气订阅 [地名/经纬度] [推送时间(小时)] 如：天气订阅 北京 10。不跟随推送时间参数默认推送时间为早上8点 |
+| 查询天气订阅 | 用户 | 否 | 全部 | 查询你的私人天气订阅 |
+| 删除天气订阅 | 群员 | 否 | 群聊 | 按订阅id删除你的天气订阅，订阅id请先执行查询命令获取 |
+| 群天气订阅 | 群员 | 否 | 群聊 | 群天气订阅，将在群聊内推送并@订阅者，命令格式同私人订阅 |
+| 查询群天气订阅 | 群员 | 否 | 群聊 | 查询你在本群的天气订阅 |
+| 删除群天气订阅 | 群员 | 否 | 群聊 | 按订阅id删除你在本群的天气订阅，订阅id请先执行查询命令获取 |
+
 ### 效果图
-如果有效果图的话
+
+<img align="left" src="https://ghproxy.com/https://raw.githubusercontent.com/FrostN0v0/kirami-plugin-qweather/master/example1.jpg" width='380px' alt="示例1">
+
+<img align="left" src="https://ghproxy.com/https://raw.githubusercontent.com/FrostN0v0/kirami-plugin-qweather/master/example2.jpg" width='380px' alt="示例2">
+
+<img align="left" src="https://ghproxy.com/https://raw.githubusercontent.com/FrostN0v0/kirami-plugin-qweather/master/example3.jpg" width='380px' alt="示例3">
